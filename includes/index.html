@@ -38,12 +38,6 @@
       </section>
       <section id="black">
         <section id="features">
-          <div id="ballons-first">
-            <div class="ballon"><a href="">Työntekijät/Päälliköt</a></div>
-            <div class="ballon"><a href="">Yhteystiedot</a></div>
-            <div class="ballon"><a href="">Historia</a></div>
-          </div>
-
           <div id="ballons-second">
             <div class="ballon"><a href="">Elokuvat</a></div>
             <div class="ballon"><a href="">Kategoriat</a></div>
@@ -77,9 +71,9 @@
         const info1Div = document.getElementById("info1");
         const info2Div = document.getElementById("info2");
 
-        data.actors.forEach((actor) => {
+        data.films.forEach((film) => {
           const p = document.createElement("p");
-          p.textContent = actor.first_name + " " + actor.last_name;
+          p.textContent = film.title;
           info1Div.appendChild(p);
         });
 

@@ -21,7 +21,7 @@ function getInfo(res, query1, query2) {
       }
 
       // Send data as JSON
-      res.json({ actors: rows1, categories: rows2 });
+      res.json({ films: rows1, categories: rows2 });
     });
   });
 }
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 app.get("/data", (req, res) => {
   getInfo(
     res,
-    "SELECT * FROM actor",
+    "SELECT title FROM film",
     "SELECT * FROM category"
   );
 });
