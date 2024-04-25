@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/style.css" />
-    <script src="script.js" defer></script>
     <title>Document</title>
   </head>
 
@@ -47,16 +46,14 @@
 
           <div id="ballons-second">
             <div class="ballon"><a href="">Elokuvat</a></div>
-            <div class="ballon"><a href="">Pelejen vuokraaminen</a></div>
+            <div class="ballon"><a href="">Kategoriat</a></div>
           </div>
         </section>
 
         <section id="big-ballons">
           <div class="big-ballon" id="info1">
-            <h1>Info 1</h1>
           </div>
           <div class="big-ballon" id="info2">
-            <h1>Info 2</h1>
           </div>
         </section>
       </section>
@@ -74,21 +71,21 @@
     </main>
   </body>
   <script>
-    fetch("/data")
+        fetch("/data")
       .then((response) => response.json())
       .then((data) => {
         const info1Div = document.getElementById("info1");
         const info2Div = document.getElementById("info2");
 
-        data.info1.forEach((item) => {
+        data.actors.forEach((actor) => {
           const p = document.createElement("p");
-          p.textContent = item.malli; // Assuming "malli" is the column name
+          p.textContent = actor.first_name + " " + actor.last_name;
           info1Div.appendChild(p);
         });
 
-        data.info2.forEach((item) => {
+        data.categories.forEach((category) => {
           const p = document.createElement("p");
-          p.textContent = item.id; // Assuming "malli" is the column name
+          p.textContent = category.name;
           info2Div.appendChild(p);
         });
       })

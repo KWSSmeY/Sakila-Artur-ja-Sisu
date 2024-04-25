@@ -135,6 +135,7 @@ a:hover {
 .big-ballon {
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
     border-radius: 5px;
     padding: 30px;
     margin: 10px;

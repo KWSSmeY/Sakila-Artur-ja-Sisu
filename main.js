@@ -7,31 +7,29 @@ const dbconfig = require("./configs/dbconfig.json");
 
 const app = express();
 
-function getInfo(res, kysely) {
+function getInfo(res, query1, query2) {
   const connection = mysql.createConnection(dbconfig);
   connection.connect();
-  connection.query(kysely, (err, rows) => {
+  connection.query(query1, (err, rows1) => {
     if (err) {
       throw err;
     }
 
-    const info1 = [];
-    const info2 = [];
-    for (let i = 0; i < rows.length; i++) {
-      if (i % 2 === 0) {
-        info1.push(rows[i]);
-      } else {
-        info2.push(rows[i]);
+    connection.query(query2, (err, rows2) => {
+      if (err) {
+        throw err;
       }
-    }
 
-    // Send data as JSON
-    res.json({ info1, info2 });
+      // Send data as JSON
+      res.json({ actors: rows1, categories: rows2 });
+    });
   });
 }
 
 // Serve static files from the 'styles' directory
 app.use("/styles", express.static(path.join(__dirname, "styles")));
+
+app.use("/photos", express.static(path.join(__dirname, "photos")));
 
 // Serve the HTML file
 app.get("/", (req, res) => {
@@ -40,7 +38,11 @@ app.get("/", (req, res) => {
 
 // Provide data endpoint
 app.get("/data", (req, res) => {
-  getInfo(res, "SELECT * FROM auto");
+  getInfo(
+    res,
+    "SELECT * FROM actor",
+    "SELECT * FROM category"
+  );
 });
 
 app.listen(port, host, () => {
