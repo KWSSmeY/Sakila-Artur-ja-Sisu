@@ -1,0 +1,49 @@
+<%- include('osapohjat/header'); %>
+<body>
+  <main>
+    <section id="main-text">
+      <h1>Tervetuloa Sakilaan: Kohti Huippuluokan Palveluita</h1>
+      <p>
+        Sakila on innovatiivinen yritys, joka on omistautunut tarjoamaan
+        asiakkailleen ensiluokkaisia palveluita ja ratkaisuja. Ylpeänä
+        esittelemme Sakilan, joka on kulmakivemme ja sitoutumisemme tulos
+        laadukkaaseen palveluun sekä kestäviin liiketoimintakäytäntöihin.
+      </p>
+    </section>
+    <section id="black">
+      <section id="features">
+        <div id="ballons-second">
+          <div class="ballon"><a href="">Elokuvat</a></div>
+          <div class="ballon"><a href="">Kategoriat</a></div>
+        </div>
+      </section>
+
+      <section id="big-ballons">
+        <div class="big-ballon" id="info1"></div>
+        <div class="big-ballon" id="info2"></div>
+      </section>
+    </section>
+  </main>
+</body>
+<script>
+  fetch("/data")
+    .then((response) => response.json())
+    .then((data) => {
+      const info1Div = document.getElementById("info1");
+      const info2Div = document.getElementById("info2");
+
+      data.films.forEach((film) => {
+        const p = document.createElement("p");
+        p.textContent = film.title;
+        info1Div.appendChild(p);
+      });
+
+      data.categories.forEach((category) => {
+        const p = document.createElement("p");
+        p.textContent = category.name;
+        info2Div.appendChild(p);
+      });
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+</script>
+<%- include('osapohjat/footer'); %>

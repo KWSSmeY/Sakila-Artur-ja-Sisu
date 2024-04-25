@@ -5,7 +5,13 @@ const path = require("path");
 const { port, host } = require("./configs/config.json");
 const dbconfig = require("./configs/dbconfig.json");
 
+
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'sivupohjat'));
+
+
 
 function getInfo(res, query1, query2) {
   const connection = mysql.createConnection(dbconfig);
@@ -31,10 +37,6 @@ app.use("/styles", express.static(path.join(__dirname, "styles")));
 
 app.use("/photos", express.static(path.join(__dirname, "photos")));
 
-// Serve the HTML file
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "includes", "index.html"));
-});
 
 // Provide data endpoint
 app.get("/data", (req, res) => {
@@ -43,6 +45,10 @@ app.get("/data", (req, res) => {
     "SELECT title FROM film",
     "SELECT * FROM category"
   );
+});
+
+app.get("/", (req, res) =>{
+  res.render('etusivu', {});
 });
 
 app.listen(port, host, () => {
