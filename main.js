@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 
 // Provide data endpoint
 app.get("/data", (req, res) => {
-  getInfo(res, "SELECT * FROM auto");
+  getInfo(res, "SELECT * FROM actor");
 });
 
 app.listen(port, host, () => {
