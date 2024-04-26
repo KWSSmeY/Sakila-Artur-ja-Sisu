@@ -13,10 +13,10 @@ body {
   /* background-color: #6495ED; */
 }
 
-header {
+/* header {
   background-color: #20aad8;
   padding: 10px 0;
-}
+} */
 
 button {
   background-color: #0077cc;
@@ -49,6 +49,44 @@ a:hover {
   padding: 0 20px;
 }
 
+header {
+  background-color: #20aad8;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo-text {
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+	margin-right: 40px;
+}
+
+#logo-text img {
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #f5f5f5;
+}
+
 #logo-text {
   display: flex;
   color: #ffffff;
@@ -62,6 +100,7 @@ a:hover {
 #search {
   display: flex;
   align-items: center;
+  /* margin-right: 44%; */
 }
 
 #search-input {
@@ -87,8 +126,8 @@ a:hover {
   background-color: #20aad8;
   color: #ffffff;
   padding: 10px 0;
-  text-align: center;
-  z-index: 999; 
+  text-align: left;
+  z-index: 999;
 }
 
 #under-line img {
@@ -146,13 +185,13 @@ a:hover {
 }
 
 .sisältö {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 70px;
-    min-height: calc(100vh - 150px);
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 70px;
+  min-height: calc(100vh - 150px);
+}
 .rivit {
   display: flex;
   flex-wrap: wrap;
@@ -169,6 +208,5 @@ a:hover {
 }
 
 h1 {
-    text-align: center;
-  }
-  
+  text-align: center;
+}

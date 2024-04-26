@@ -45,6 +45,18 @@ app.get("/", (req, res) => {
   res.render("etusivu", {});
 });
 
+app.get("/elokuvat", (req, res) => {
+  res.render("elokuva", {});
+});
+
+app.get("/yhteystiedot", (req, res) => {
+  res.render("yhteystiedot", {});
+});
+
+app.get("/tietoa-meista", (req, res) => {
+  res.render("tietoa-meistä", {});
+});
+
 app.listen(port, host, () => {
   console.log(`Server running on http://${host}:${port}`);
 });
