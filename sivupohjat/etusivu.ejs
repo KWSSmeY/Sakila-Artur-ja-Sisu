@@ -2,48 +2,46 @@
 <body>
   <main>
     <section id="main-text">
-      <h1>Tervetuloa Sakilaan: Kohti Huippuluokan Palveluita</h1>
+      <!-- <h1>Tervetuloa Sakilaan: Kohti Huippuluokan Palveluita</h1>
       <p>
         Sakila on innovatiivinen yritys, joka on omistautunut tarjoamaan
         asiakkailleen ensiluokkaisia palveluita ja ratkaisuja. Ylpeänä
         esittelemme Sakilan, joka on kulmakivemme ja sitoutumisemme tulos
         laadukkaaseen palveluun sekä kestäviin liiketoimintakäytäntöihin.
-      </p>
+      </p> -->
     </section>
-    <section id="black">
-      <section id="features">
-        <div id="ballons-second">
-          <div class="ballon"><a href="">Elokuvat</a></div>
-          <div class="ballon"><a href="">Kategoriat</a></div>
-        </div>
-      </section>
-
-      <section id="big-ballons">
-        <div class="big-ballon" id="info1"></div>
-        <div class="big-ballon" id="info2"></div>
-      </section>
-    </section>
+    <h1>Suosituimmat elokuvamme</h1>
+    <div class="sisältö">
+      <div class="rivit"></div>
+    </div>
   </main>
 </body>
 <script>
   fetch("/data")
     .then((response) => response.json())
     .then((data) => {
-      const info1Div = document.getElementById("info1");
-      const info2Div = document.getElementById("info2");
+      const elokuvatDiv = document.querySelector(".rivit");
 
-      data.films.forEach((film) => {
-        const p = document.createElement("p");
-        p.textContent = film.title;
-        info1Div.appendChild(p);
-      });
+      data.elokuvat.forEach((elokuva) => {
+        const div = document.createElement("div");
+        div.classList.add("elokuva");
 
-      data.categories.forEach((category) => {
-        const p = document.createElement("p");
-        p.textContent = category.name;
-        info2Div.appendChild(p);
+        const otsikko = document.createElement("h2");
+        otsikko.textContent = elokuva.title;
+
+        const kuvaus = document.createElement("p");
+        kuvaus.textContent = elokuva.description;
+
+        const elokuvanPituus = document.createElement("p");
+        elokuvanPituus.textContent = "Length: " + elokuva.length + "min";
+
+        div.appendChild(otsikko);
+        div.appendChild(kuvaus);
+        div.appendChild(elokuvanPituus);
+
+        elokuvatDiv.appendChild(div);
       });
     })
-    .catch((error) => console.error("Error fetching data:", error));
+    .catch((error) => console.error("Virhe haettaessa tietoja:", error));
 </script>
 <%- include('osapohjat/footer'); %>
