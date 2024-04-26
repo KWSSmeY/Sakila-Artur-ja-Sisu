@@ -1,0 +1,19 @@
+<%- include('osapohjat/header'); %>
+<body>
+    <div class="container">
+        <h1 class="main-title">Selaa elokuvia genreittäin</h1>
+        <div class="spacer"></div> <!-- Lisää välit otsikon ja laatikoiden väliin -->
+        <div class="list-box">
+            <% var rowCount = Math.ceil(genres.length / 3); %>
+            <% for (var i = 0; i < rowCount; i++) { %>
+                <div class="row">
+                    <% for (var j = i * 3; j < Math.min((i + 1) * 3, genres.length); j++) { %>
+                        <div class="genre-box">
+                            <a href="/genret/<%= genres[j].name %>"><%= genres[j].name %></a>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>

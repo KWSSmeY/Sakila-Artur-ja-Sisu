@@ -57,6 +57,42 @@ app.get("/tietoa-meista", (req, res) => {
   res.render("tietoa-meistä", {});
 });
 
+
+// Genret-sivu
+app.get("/genret", (req, res) => {
+  const query = "SELECT name FROM category";
+  const connection = mysql.createConnection(dbconfig);
+  connection.connect();
+  connection.query(query, (err, genres) => {
+    if (err) {
+      throw err;
+    }
+    res.render("genret", { genres: genres });
+  });
+});
+
+app.get("/genret/:genre", (req, res) => {
+  const genre = req.params.genre;
+  const query = `
+    SELECT film.title, film.length, film.description 
+    FROM film 
+    JOIN film_category ON film.film_id = film_category.film_id
+    JOIN category ON film_category.category_id = category.category_id
+    WHERE category.name = ?
+  `;
+  const connection = mysql.createConnection(dbconfig);
+  connection.connect();
+  connection.query(query, [genre], (err, movies) => {
+    if (err) {
+      throw err;
+    }
+    res.render("genren-elokuvat", { genre: genre, movies: movies });
+  });
+});
+
+
+
+
 app.listen(port, host, () => {
   console.log(`Server running on http://${host}:${port}`);
 });

@@ -1,0 +1,15 @@
+<body>
+    <%- include('osapohjat/header'); %>
+    <div class="container">
+        <h1 class="main-title">Elokuvat genressä <%= genre %></h1>
+        <div class="movie-container">
+            <% movies.forEach(movie => { %>
+                <div class="movie-box">
+                    <h2><%= movie.title %></h2>
+                    <p>Kesto: <%= movie.length %> min</p>
+                    <p><%= movie.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
