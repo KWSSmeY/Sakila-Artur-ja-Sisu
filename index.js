@@ -67,7 +67,18 @@ app.get("/genret", (req, res) => {
     if (err) {
       throw err;
     }
-    res.render("genret", { genres: genres });
+    const query2 = `
+      SELECT film.title, film.length, film.description 
+      FROM film 
+      JOIN film_category ON film.film_id = film_category.film_id
+      JOIN category ON film_category.category_id = category.category_id
+    `;
+    connection.query(query2, (err, movies) => {
+      if (err) {
+        throw err;
+      }
+      res.render("genret", { genres: genres, movies: movies });
+    });
   });
 });
 
@@ -78,7 +89,7 @@ app.get("/genret/:genre", (req, res) => {
     FROM film 
     JOIN film_category ON film.film_id = film_category.film_id
     JOIN category ON film_category.category_id = category.category_id
-    WHERE category.name = ?
+    WHERE category.name =?
   `;
   const connection = mysql.createConnection(dbconfig);
   connection.connect();
@@ -86,11 +97,9 @@ app.get("/genret/:genre", (req, res) => {
     if (err) {
       throw err;
     }
-    res.render("genren-elokuvat", { genre: genre, movies: movies });
+    res.json({ movies: movies });
   });
 });
-
-
 
 
 app.listen(port, host, () => {
