@@ -58,7 +58,29 @@ app.get("/tietoa-meista", (req, res) => {
 });
 
 
-// Genret-sivu
+app.get("/hae", (req, res) => {
+  const hakuehto = req.query.hakuehto; 
+  const query = `
+    SELECT title, length, description 
+    FROM film 
+    WHERE title LIKE ?
+  `;
+  const connection = mysql.createConnection(dbconfig);
+  connection.connect();
+  connection.query(query, [`%${hakuehto}%`], (err, movies) => {
+    if (err) {
+      throw err;
+    }
+    const genreQuery = "SELECT name FROM category";
+    connection.query(genreQuery, (err, genres) => {
+      if (err) {
+        throw err;
+      }
+      res.render("genret", { genres: genres, movies: movies });
+    });
+  });
+});
+
 app.get("/genret", (req, res) => {
   const query = "SELECT name FROM category";
   const connection = mysql.createConnection(dbconfig);
@@ -89,7 +111,7 @@ app.get("/genret/:genre", (req, res) => {
     FROM film 
     JOIN film_category ON film.film_id = film_category.film_id
     JOIN category ON film_category.category_id = category.category_id
-    WHERE category.name =?
+    WHERE category.name = ?
   `;
   const connection = mysql.createConnection(dbconfig);
   connection.connect();

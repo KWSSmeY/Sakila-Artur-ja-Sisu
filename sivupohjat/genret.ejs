@@ -3,52 +3,72 @@
   <div class="container">
     <div class="sidebar">
       <ul class="genre-list">
-        <% genres.forEach(genre => { %>
         <li>
-          <a href="#" data-genre="<%= genre.name %>"><%= genre.name %></a>
+          <a href="javascript: location.reload();">Kaikki elokuvat</a>
         </li>
+        <% genres.forEach(genre => { %>
+          <li>
+            <a href="#" data-genre="<%= genre.name %>"><%= genre.name %></a>
+          </li>          
         <% }); %>
       </ul>
     </div>
     <div class="main-content">
-        <h1 class="main-title"></h1>
-        <div class="movie-container">
-          <% movies.forEach(movie => { %>
-          <div class="movie-box">
-            <h2><%= movie.title %></h2>
-            <p>Kesto: <%= movie.length %> min</p>
-            <p><%= movie.description %></p>
-          </div>
-          <% }); %>
+      <h1 class="main-title">Elokuvat</h1>
+      <div class="movie-container" id="movie-container">
+        <% movies.forEach(movie => { %>
+        <div class="movie-box">
+          <h2><%= movie.title %></h2>
+          <p>Kesto: <%= movie.length %> min</p>
+          <p><%= movie.description %></p>
         </div>
+        <% }); %>
       </div>
+    </div>
   </div>
 
   <script>
-const genreLinks = document.querySelectorAll(".genre-list a");
-genreLinks.forEach((link) => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    const genre = link.getAttribute("data-genre");
-    fetch(`/genret/${genre}`)
-     .then((response) => response.json())
-     .then((data) => {
-        const movieContainer = document.querySelector(".movie-container");
-        const mainTitleElement = document.querySelector(".main-title");
-        mainTitleElement.textContent = `${genre} films`;
-        movieContainer.innerHTML = "";
-        data.movies.forEach((movie) => {
-          const movieBox = document.createElement("div");
-          movieBox.className = "movie-box";
-          movieBox.innerHTML = `
-                            <h2>${movie.title}</h2>
-                            <p>Kesto: ${movie.length} min</p>
-                            <p>${movie.description}</p>
-                        `;
-          movieContainer.appendChild(movieBox);
-        });
-      });
+document.addEventListener("DOMContentLoaded", () => {
+  const genreLinks = document.querySelectorAll(".genre-list a");
+  genreLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const genre = link.getAttribute("data-genre");
+      fetch(`/genret/${genre}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Received data:", data);
+          const movies = data.movies;
+          const mainTitleElement = document.querySelector(".main-title");
+          mainTitleElement.textContent = `${genre} elokuvat`;
+
+          const movieContainer = document.querySelector(".movie-container");
+          movieContainer.innerHTML = "";
+          movies.forEach((movie) => {
+            const movieBox = document.createElement("div");
+            movieBox.classList.add("movie-box");
+            movieBox.innerHTML = `
+              <h2>${movie.title}</h2>
+              <p>Kesto: ${movie.length} min</p>
+              <p>${movie.description}</p>
+            `;
+            movieContainer.appendChild(movieBox);
+          });
+        })
+        .catch((error) => console.error("Error fetching movies:", error));
+    });
   });
+
+  const allMoviesLink = document.querySelector(".genre-list a[href='javascript: location.reload();']");
+allMoviesLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.href = '/genret'; 
+});
 });
   </script>
 </body>
