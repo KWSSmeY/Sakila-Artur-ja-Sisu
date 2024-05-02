@@ -14,7 +14,11 @@
       </ul>
     </div>
     <div class="main-content">
-      <h1 class="main-title">Elokuvat</h1>
+      <% if (hakuehto === "") { %>
+        <h1 class="main-title"> Kaikki elokuvat</h1>
+      <% } else { %>
+        <h1 class="main-title">Tulokset haulle <%= hakuehto %></h1>
+      <% } %>
       <div class="movie-container" id="movie-container">
         <% movies.forEach(movie => { %>
         <div class="movie-box">
@@ -25,6 +29,7 @@
         <% }); %>
       </div>
     </div>
+    
   </div>
 
   <script>
@@ -42,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return response.json();
         })
         .then((data) => {
-          console.log("Received data:", data);
+          // console.log("Received data:", data);
           const movies = data.movies;
           const mainTitleElement = document.querySelector(".main-title");
           mainTitleElement.textContent = `${genre} elokuvat`;

@@ -76,7 +76,7 @@ app.get("/hae", (req, res) => {
       if (err) {
         throw err;
       }
-      res.render("genret", { genres: genres, movies: movies });
+      res.render("genret", { genres: genres, movies: movies, hakuehto: hakuehto });
     });
   });
 });
@@ -99,7 +99,7 @@ app.get("/genret", (req, res) => {
       if (err) {
         throw err;
       }
-      res.render("genret", { genres: genres, movies: movies });
+      res.render("genret", { genres: genres, movies: movies, hakuehto: "" });
     });
   });
 });
