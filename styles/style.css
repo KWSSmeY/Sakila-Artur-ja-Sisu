@@ -48,8 +48,11 @@ h2 {
 p {
   font-family: "Lato", sans-serif;
 }
+
+
+
 #ala-laita {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #nav-bar {
@@ -72,7 +75,7 @@ header {
   display: flex;
   color: #ffffff;
   align-items: center;
-	margin-right: 40px;
+  margin-right: 40px;
 }
 
 #logo-text img {
@@ -145,7 +148,7 @@ nav ul li a:hover {
 }
 
 #info {
-  margin-left: auto;
+  width: fit-content;
   padding: 10px;
 }
 
@@ -181,6 +184,127 @@ nav ul li a:hover {
   font-family: "Teko", sans-serif;
 }
 
+#henkilokunta {
+  height: fit-content;
+  margin: 0 auto;
+}
+
+#copyright {
+  padding-left: 90px;
+  margin: 0 auto;
+}
+
+#under-line-photo {
+  margin: 5px;
+}
+
+
+#shoppingcart {
+  width: 55px;
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+
+.lisaa-ostoskoriin{
+  margin-top: 5%;
+}
+
+.lisaa-ostoskoriin:hover{
+  background-color: #085790;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: -450px;
+  width: 450px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1001;
+}
+
+.cart.open {
+  right: 0;
+}
+
+.cart-icon-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.cart h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.cart-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.product-name {
+  font-size: 1.1em;
+  color: #333;
+  margin-right: 10px;
+  flex: 1; 
+}
+
+.remove-item {
+  margin-left: 10px; 
+}
+
+.product-price {
+  margin-right: 10px; 
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.remove-item {
+  margin-left: 10px; 
+  color: #dc3545;
+  transition: background-color 0.3s; 
+}
+
+.remove-item:hover {
+  cursor: pointer;
+}
+
+
+.product-name {
+  font-size: 1.1em;
+  color: #333;
+  margin-right: 10px;
+  flex: 1; /* Joustava leveys */
+}
+
+
+
 .ballon {
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -212,12 +336,14 @@ nav ul li a:hover {
   margin-top: 70px;
   min-height: calc(100vh - 150px);
 }
+
 .rivit {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
+
 .elokuva {
   background-color: lightskyblue;
   padding: 20px;
@@ -236,14 +362,14 @@ h1 {
 }
 
 .main-title {
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
   font-family: 'Arial', sans-serif;
   font-size: 32px;
   color: #333;
 }
 
 .spacer {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .list-box {
@@ -266,10 +392,12 @@ h1 {
 .sidebar {
   flex: 0 0 200px;
   padding: 20px;
-  background: linear-gradient(135deg, #92010c 0%, lightskyblue 100%);
-  color: #fff; 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
-  max-height: calc(100vh - 80px); 
+  /* background: linear-gradient(135deg, #92010c 0%, lightskyblue 100%); */
+  background: linear-gradient(100deg, lightskyblue 50%, #ffffff 100%);
+  /* background: #20add8; */
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 80px);
 }
 
 .genre-list {
@@ -284,25 +412,18 @@ h1 {
 
 .genre-list a {
   text-decoration: none;
-  color: #fff; 
-  padding: 10px 15px; 
+  color: #fff;
+  padding: 10px 15px;
   border-radius: 5px;
   display: block;
   width: 100%;
   text-align: center;
-  transition: background-color 0.3s, transform 0.3s; 
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .genre-list a:hover {
-  background-color: rgba(255, 255, 255, 0.1); 
-  transform: translateY(-3px); 
-}
-
-
-.main-content {
-  flex: 1;
-  padding: 200px;
-  padding-top: 2%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
 }
 
 .main-title {
@@ -332,22 +453,39 @@ h1 {
   background-color: #f0f0f0;
 }
 
+.main-content {
+  flex: 1;
+  padding: 200px;
+  padding-top: 2%;
+}
+
 .movie-box {
   flex: 0 0 calc(33% - 20px);
   margin-bottom: 20px;
-  background-color: lightskyblue;
+  background: rgb(211, 232, 255) 45.5%;
   padding: 40px;
   border-radius: 10px;
-  border: solid 3.5px;
-  border-color: #92010c;
+  height: 280px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
 .movie-box h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
 }
 
 .movie-box p {
   margin: 0;
+  line-height: 1.4;
+}
+
+.movie-box .description {
+  margin-top: 10px;
+}
+
+.movie-box .price {
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
 }

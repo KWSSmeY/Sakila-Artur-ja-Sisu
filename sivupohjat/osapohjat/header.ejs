@@ -22,7 +22,7 @@
         <nav>
           <ul>
             <li><a href="/genret">Elokuvat</a></li>
-            <li><a href="/yhteystiedot">Yhteystiedot</a></li>
+            <li><a href="/henkilokunta">Henkilökunta</a></li>
             <li><a href="/tietoa-meista">Tietoa meistä</a></li>
           </ul>
         </nav>
@@ -31,6 +31,10 @@
         <form action="/hae" method="GET">
           <input type="text" id="search-input" name="hakuehto" placeholder="Elokuvan nimi">
           <button type="submit">Hae</button>
+          <!-- <img src="/photos/cart.png" id="shoppingcart" class="cart-icon" onclick="toggleCart()"> -->
+          <div id="cart-icon" onclick="toggleCart()" class="cart-icon">
+            <img src="/photos/cart.png" id="shoppingcart">
+          </div>
       </form>
       </div>
     </header>

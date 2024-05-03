@@ -49,8 +49,8 @@ app.get("/elokuvat", (req, res) => {
   res.render("elokuva", {});
 });
 
-app.get("/yhteystiedot", (req, res) => {
-  res.render("yhteystiedot", {});
+app.get("/henkilokunta", (req, res) => {
+  res.render("henkilokunta", {});
 });
 
 app.get("/tietoa-meista", (req, res) => {
@@ -61,7 +61,7 @@ app.get("/tietoa-meista", (req, res) => {
 app.get("/hae", (req, res) => {
   const hakuehto = req.query.hakuehto; 
   const query = `
-    SELECT title, length, description 
+    SELECT title, length, description, film.rental_rate 
     FROM film 
     WHERE title LIKE ?
   `;
@@ -90,7 +90,7 @@ app.get("/genret", (req, res) => {
       throw err;
     }
     const query2 = `
-      SELECT film.title, film.length, film.description 
+      SELECT film.title, film.length, film.description, film.rental_rate 
       FROM film 
       JOIN film_category ON film.film_id = film_category.film_id
       JOIN category ON film_category.category_id = category.category_id
@@ -107,7 +107,7 @@ app.get("/genret", (req, res) => {
 app.get("/genret/:genre", (req, res) => {
   const genre = req.params.genre;
   const query = `
-    SELECT film.title, film.length, film.description 
+    SELECT film.title, film.length, film.description, film.rental_rate
     FROM film 
     JOIN film_category ON film.film_id = film_category.film_id
     JOIN category ON film_category.category_id = category.category_id
@@ -119,7 +119,9 @@ app.get("/genret/:genre", (req, res) => {
     if (err) {
       throw err;
     }
-    res.json({ movies: movies });
+    res.json({
+      movies: movies
+    });
   });
 });
 
