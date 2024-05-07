@@ -37,31 +37,58 @@
   <div id="cart" class="cart">
     <h2>Ostoskori</h2>
     <ul id="cart-items" class="cart-items"></ul>
-    <button id="close-cart" onclick="toggleCart()">Sulje</button>
+    <div id="total-price" class="total-price"></div>
+    <div class="buttons">
+      <button id="close-cart" onclick="toggleCart()">Sulje</button>
+      <button id="clear-cart" onclick="clearCart()">Tyhjennä ostoskori</button>
+    </div>
   </div>
 
 <script>
+function YhteisHinta() {
+  var totalPrice = 0;
+  var cartItems = document.querySelectorAll(".cart-item");
+  cartItems.forEach((item) => {
+    var itemPrice = parseFloat(item.querySelector(".product-price").textContent);
+    totalPrice += itemPrice;
+  });
+  var totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.textContent = "Yhteensä: " + totalPrice.toFixed(2) + " €";
+}
+
 function toggleCart() {
   var cart = document.getElementById("cart");
   cart.classList.toggle("open");
+  YhteisHinta();
 }
 
 function removeFromCart(item) {
   item.parentElement.remove();
+  YhteisHinta();
+}
+
+function clearCart() {
+  var cartItems = document.querySelectorAll(".cart-item");
+
+  cartItems.forEach((item) => {
+    item.remove();
+  });
+  YhteisHinta();
 }
 
 function addToCart(button) {
   var cartItems = document.getElementById("cart-items");
   var li = document.createElement("li");
   var itemName = button.getAttribute("data-title");
-  var itemPrice = button.getAttribute("data-price");
+  var itemPrice = parseFloat(button.getAttribute("data-price"));
   li.innerHTML = `
     <span class="product-name">${itemName}</span>
-    ${itemPrice} €
+    <span class="product-price">${itemPrice.toFixed(2)}</span>€
     <span class="remove-item" onclick="removeFromCart(this)">Poista</span>
   `;
   li.classList.add("cart-item");
   cartItems.appendChild(li);
+  YhteisHinta();
 }
 
   document.addEventListener("DOMContentLoaded", () => {

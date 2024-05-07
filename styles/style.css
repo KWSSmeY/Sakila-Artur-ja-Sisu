@@ -254,6 +254,10 @@ nav ul li a:hover {
   padding: 0;
 }
 
+.total-price{
+  margin-left: 65%;
+}
+
 .cart-item {
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
@@ -300,7 +304,7 @@ nav ul li a:hover {
   font-size: 1.1em;
   color: #333;
   margin-right: 10px;
-  flex: 1; /* Joustava leveys */
+  flex: 1; 
 }
 
 
