@@ -33,11 +33,12 @@ main {
 
 a {
   font-family: "Lato", sans-serif;
-  color: gray;
+  font-weight: 800;
+  color: black;
 }
 
 a:hover {
-  color: #373435;
+  text-decoration: underline;
 }
 
 h2 {

@@ -10,7 +10,7 @@
         laadukkaaseen palveluun sekä kestäviin liiketoimintakäytäntöihin.
       </p> -->
     </section>
-    <h1 id="suosituimmat">Suosituimmat elokuvamme</h1>
+    <h1 id="suosituimmat">Elokuva suositukset</h1>
     <div class="sisältö">
       <div class="rivit"></div>
     </div>
@@ -27,13 +27,17 @@
         div.classList.add("elokuva");
 
         const otsikko = document.createElement("h2");
-        otsikko.textContent = elokuva.title;
 
         const kuvaus = document.createElement("p");
         kuvaus.textContent = elokuva.description;
 
         const elokuvanPituus = document.createElement("p");
         elokuvanPituus.textContent = "Length: " + elokuva.length + "min";
+
+        const link = document.createElement("a");
+        link.href = `/hae?hakuehto=${encodeURIComponent(elokuva.title)}`;
+        link.textContent = elokuva.title;
+        otsikko.appendChild(link);
 
         div.appendChild(otsikko);
         div.appendChild(kuvaus);
