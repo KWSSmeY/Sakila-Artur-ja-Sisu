@@ -56,6 +56,12 @@ function YhteisHinta() {
   totalPriceElement.textContent = "Yhteensä: " + totalPrice.toFixed(2) + " €";
 }
 
+function updateCartCount() {
+  var cartCount = document.getElementById("cart-count");
+  var cartItems = document.querySelectorAll(".cart-item");
+  cartCount.textContent = cartItems.length;
+}
+
 function toggleCart() {
   var cart = document.getElementById("cart");
   cart.classList.toggle("open");
@@ -65,6 +71,7 @@ function toggleCart() {
 function removeFromCart(item) {
   item.parentElement.remove();
   YhteisHinta();
+  updateCartCount();
 }
 
 function clearCart() {
@@ -74,6 +81,7 @@ function clearCart() {
     item.remove();
   });
   YhteisHinta();
+  updateCartCount();
 }
 
 function addToCart(button) {
@@ -89,6 +97,7 @@ function addToCart(button) {
   li.classList.add("cart-item");
   cartItems.appendChild(li);
   YhteisHinta();
+  updateCartCount();
 }
 
   document.addEventListener("DOMContentLoaded", () => {
