@@ -50,8 +50,6 @@ p {
   font-family: "Lato", sans-serif;
 }
 
-
-
 #ala-laita {
   color: #ffffff;
   font-family: "Lato", sans-serif;
@@ -210,7 +208,6 @@ nav ul li a:hover {
   cursor: pointer;
   z-index: 999;
 }
-
 
 .lisaa-ostoskoriin{
   margin-top: 5%;
@@ -381,10 +378,6 @@ h1 {
   text-align: center;
 }
 
-.container {
-  text-align: center;
-}
-
 .main-title {
   margin-bottom: 30px;
   font-family: 'Arial', sans-serif;
@@ -408,9 +401,14 @@ h1 {
 }
 
 .container {
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.center {
+  display: flex;
 }
 
 .sidebar {
