@@ -209,12 +209,20 @@ nav ul li a:hover {
   z-index: 999;
 }
 
-<<<<<<< HEAD
+#map {
+  width: 100%;
+  margin: 0 auto;
+}
 
-.lisaa-ostoskoriin {
-=======
+#map iframe {
+  width: 100%;
+}
+
+#map-text {
+  text-align: center;
+}
+
 .lisaa-ostoskoriin{
->>>>>>> 55decaa2e7e21c01b7acce58e88020995ac2c93f
   margin-top: 5%;
 }
 
@@ -406,10 +414,7 @@ h1 {
 
 .container {
   text-align: center;
-<<<<<<< HEAD
-=======
   display: flex;
->>>>>>> 55decaa2e7e21c01b7acce58e88020995ac2c93f
   flex-wrap: wrap;
   justify-content: space-between;
 }
