@@ -1,0 +1,148 @@
+<%- include('osapohjat/header'); %>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <ul class="genre-list">
+        <li>
+          <a href="javascript: location.reload();">Kaikki elokuvat</a>
+        </li>
+        <% genres.forEach(genre => { %>
+        <li>
+          <a href="#" data-genre="<%= genre.name %>"><%= genre.name %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <div class="main-content">
+      <% if (hakuehto === "") { %>
+      <h1 class="main-title"> Kaikki elokuvat</h1>
+      <% } else { %>
+      <h1 class="main-title">Tulokset haulla <%= hakuehto %></h1>
+      <% } %>
+      <div class="movie-container" id="movie-container">
+        <% movies.forEach(movie => { %>
+        <div class="movie-box">
+          <h2><%= movie.title %></h2>
+          <p><%= movie.length %> min</p>
+          <div class="description"><%= movie.description %></div>
+          <p class="price">Hinta: <%= movie.rental_rate ? movie.rental_rate + ' €' : 'Hinta ei saatavilla' %></p>
+          <button class="lisaa-ostoskoriin" data-title="<%= movie.title %>" data-price="<%= movie.rental_rate %>"
+            onclick="addToCart(this)">Lisää ostoskoriin</button>
+        </div>
+
+        <% }); %>
+      </div>
+    </div>
+  </div>
+  <div id="cart" class="cart">
+    <h2>Ostoskori</h2>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div id="total-price" class="total-price"></div>
+    <div class="buttons">
+      <button id="close-cart" onclick="toggleCart()">Sulje</button>
+      <button id="clear-cart" onclick="clearCart()">Tyhjennä ostoskori</button>
+    </div>
+  </div>
+
+<script>
+function YhteisHinta() {
+  var totalPrice = 0;
+  var cartItems = document.querySelectorAll(".cart-item");
+  cartItems.forEach((item) => {
+    var itemPrice = parseFloat(item.querySelector(".product-price").textContent);
+    totalPrice += itemPrice;
+  });
+  var totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.textContent = "Yhteensä: " + totalPrice.toFixed(2) + " €";
+}
+
+function updateCartCount() {
+  var cartCount = document.getElementById("cart-count");
+  var cartItems = document.querySelectorAll(".cart-item");
+  cartCount.textContent = cartItems.length;
+}
+
+function toggleCart() {
+  var cart = document.getElementById("cart");
+  cart.classList.toggle("open");
+  YhteisHinta();
+}
+
+function removeFromCart(item) {
+  item.parentElement.remove();
+  YhteisHinta();
+  updateCartCount();
+}
+
+function clearCart() {
+  var cartItems = document.querySelectorAll(".cart-item");
+
+  cartItems.forEach((item) => {
+    item.remove();
+  });
+  YhteisHinta();
+  updateCartCount();
+}
+
+function addToCart(button) {
+  var cartItems = document.getElementById("cart-items");
+  var li = document.createElement("li");
+  var itemName = button.getAttribute("data-title");
+  var itemPrice = parseFloat(button.getAttribute("data-price"));
+  li.innerHTML = `
+    <span class="product-name">${itemName}</span>
+    <span class="product-price">${itemPrice.toFixed(2)}</span>€
+    <span class="remove-item" onclick="removeFromCart(this)">Poista</span>
+  `;
+  li.classList.add("cart-item");
+  cartItems.appendChild(li);
+  YhteisHinta();
+  updateCartCount();
+}
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const genreLinks = document.querySelectorAll(".genre-list a");
+      genreLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const genre = link.getAttribute("data-genre");
+          fetch(`/genret/${genre}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const movies = data.movies;
+              const mainTitleElement = document.querySelector(".main-title");
+              mainTitleElement.textContent = `${genre} elokuvat`;
+
+              const movieContainer = document.querySelector(".movie-container");
+              movieContainer.innerHTML = "";
+              movies.forEach((movie) => {
+                const movieBox = document.createElement("div");
+                movieBox.classList.add("movie-box");
+                movieBox.innerHTML = `
+              <h2>${movie.title}</h2>
+              <p>${movie.length} min</p>
+              <div class="description">${movie.description}</div>
+              <p class="price">hinta: ${movie.rental_rate} €</p>
+              <button class="lisaa-ostoskoriin" data-title="${movie.title}" data-price="${movie.rental_rate}" onclick="addToCart(this)">Lisää ostoskoriin</button>
+            `;
+                movieContainer.appendChild(movieBox);
+              });
+            })
+            .catch((error) => console.error("Error fetching movies:", error));
+        });
+      });
+
+      const allMoviesLink = document.querySelector(".genre-list a[href='javascript: location.reload();']");
+      allMoviesLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = '/genret';
+      });
+    });
+  </script>
+</body>
+  <!-- <%- include('osapohjat/footer'); %> -->

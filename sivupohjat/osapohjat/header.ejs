@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div id="nav-bar">
+        <div id="logo-text">
+          <img src="/photos/logo_tummapohja.png" alt="" width="100px" />
+          <h1><a href="/" id="sakilalogo">Sakila Oy</a></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/genret">Elokuvat</a></li>
+            <li><a href="/tietoa-meista">Tietoa meistä</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div id="search">
+        <form action="/hae" method="GET">
+          <input type="text" id="search-input" name="hakuehto" placeholder="Elokuvan nimi">
+          <button type="submit">Hae</button>
+          <!-- <img src="/photos/cart.png" id="shoppingcart" class="cart-icon" onclick="toggleCart()"> -->
+          <div id="cart-icon" onclick="toggleCart()" class="cart-icon">
+            <img src="/photos/cart.png" id="shoppingcart">
+            <div id="cart-count" class="cart-count">0</div>
+          </div>
+      </form>
+      </div>
+    </header>
+</html>
