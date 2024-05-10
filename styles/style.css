@@ -199,7 +199,6 @@ nav ul li a:hover {
   margin: 5px;
 }
 
-
 #shoppingcart {
   width: 55px;
   position: absolute;
@@ -208,6 +207,22 @@ nav ul li a:hover {
   cursor: pointer;
   z-index: 999;
 }
+
+
+#map {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#map iframe {
+  width: 100%;
+}
+
+#map-text {
+  text-align: center;
+}
+
+
 
 .lisaa-ostoskoriin{
   margin-top: 5%;
@@ -234,11 +249,11 @@ nav ul li a:hover {
 .cart-count {
   position: absolute;
   top: 45px;
-  right: 65px;
+  right: 55px;
   /* background-color: red; */
   color: white;
   border-radius: 50%;
-  width: 20px;
+  width: 40px;
   height: 20px;
   display: flex;
   justify-content: center;
